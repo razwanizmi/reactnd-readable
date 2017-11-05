@@ -18,11 +18,14 @@ class FeedContainer extends Component {
   }
 
   render() {
+    const selectedCategory = this.props.match.params.categoryId || "all";
+
     return (
       <Feed
         categories={this.props.categories}
         posts={this.props.posts}
         sortBy={this.props.posts}
+        selectedCategory={selectedCategory}
       />
     );
   }

@@ -1,8 +1,41 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Header } from "../";
+import { Header, Loading } from "../";
 
-const Feed = () => {
+const Categories = ({ categories, selected }) => {
+  const categoryIds = Object.keys(categories);
+
+  if (categoryIds.length === 0) {
+    return <Loading />;
+  }
+
+  return (
+    <div>
+      <Link
+        className={`btn btn-cat mb-1 ${selected === "all" && "active"}`}
+        to="/"
+      >
+        All
+      </Link>
+      {categoryIds.map(categoryId => (
+        <Link
+          className={`btn btn-cat mb-1 ${selected === categoryId && "active"}`}
+          to={`/${categoryId}`}
+        >
+          {categories[categoryId]}
+        </Link>
+      ))}
+    </div>
+  );
+};
+
+Categories.propTypes = {
+  categories: PropTypes.object.isRequired,
+  selected: PropTypes.string
+};
+
+const Feed = ({ categories, selectedCategory }) => {
   return (
     <div>
       <Header
@@ -21,18 +54,10 @@ const Feed = () => {
                   <option value="none" disabled>
                     Order by
                   </option>
-                  <option value="dateDesc">
-                    Date (latest)
-                  </option>
-                  <option value="dateAsc">
-                    Date (oldest)
-                  </option>
-                  <option value="likesDesc">
-                    Likes (highest)
-                  </option>
-                  <option value="likesAsc">
-                    Likes (lowest)
-                  </option>
+                  <option value="dateDesc">Date (latest)</option>
+                  <option value="dateAsc">Date (oldest)</option>
+                  <option value="likesDesc">Likes (highest)</option>
+                  <option value="likesAsc">Likes (lowest)</option>
                 </select>
               </div>
             </div>
@@ -40,15 +65,7 @@ const Feed = () => {
             <hr className="m-0" />
           </div>
           <div className="col-xs-2 text-center cat-list">
-            <Link className="btn btn-cat mb-1" to="/react">
-              React
-            </Link>
-            <Link className="btn btn-cat mb-1" to="/redux">
-              Redux
-            </Link>
-            <Link className="btn btn-cat mb-1" to="/udacity">
-              Udacity
-            </Link>
+            <Categories categories={categories} selected={selectedCategory} />
           </div>
         </div>
       </div>

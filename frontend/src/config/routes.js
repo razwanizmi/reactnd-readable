@@ -1,13 +1,16 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { HelloWorld } from "../components";
+import { HelloWorld, NavBar } from "../components";
 
 const getRoutes = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route component={HelloWorld} />
-      </Switch>
+      <div>
+        <NavBar />
+        <Switch>
+          <Route component={HelloWorld} />
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 };

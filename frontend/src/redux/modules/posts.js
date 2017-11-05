@@ -42,9 +42,15 @@ const deletePost = postId => {
 const posts = (state = {}, action) => {
   switch (action.type) {
     case ADD_POST:
-      return { ...state, [action.post.id]: action.post };
+      return {
+        ...state,
+        [action.post.id]: action.post
+      };
     case ADD_POSTS:
-      return { ...state, ...action.posts };
+      return {
+        ...state,
+        ...action.posts
+      };
     case UPVOTE_POST:
       return {
         ...state,

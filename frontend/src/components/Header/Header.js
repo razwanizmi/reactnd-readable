@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 const Header = ({ title, text, color }) => {
   return (
     <div className="jumbotron" style={{ background: color }}>
-      <h1 className="display-3 text-center">{title}</h1>
-      <p className="lead text-center">{text}</p>
+      <div className="container">
+        <h1 className="display-3 text-center">{title}</h1>
+        <p className="lead text-center">{text}</p>
+      </div>
     </div>
   );
 };

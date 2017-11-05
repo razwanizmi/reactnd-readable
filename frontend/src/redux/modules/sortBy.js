@@ -41,3 +41,5 @@ const sortBy = (state = "dateDesc", action) => {
       return state;
   }
 };
+
+export default sortBy;

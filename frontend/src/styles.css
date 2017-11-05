@@ -33,5 +33,6 @@ body {
 }
 
 .navbar-nav {
-  padding: 1em;
+  padding: 15px;
+  margin: 0;
 }

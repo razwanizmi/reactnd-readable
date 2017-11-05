@@ -1,1 +1,1 @@
-export const state = (state = {}, action) => state;
+export { default as posts } from "./posts";

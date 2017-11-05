@@ -15,7 +15,6 @@
       "commentCount": 2
     }
   },
-  feed: [],
   sortBy: "dateDesc",
   comments: {
     "894tuq4ut84ut8v4t8wun89g": {

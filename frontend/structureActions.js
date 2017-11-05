@@ -8,13 +8,6 @@ posts = [
   DELETE_POST
 ];
 
-feed = [
-  SORT_DATE_DESC,
-  SORT_DATE_ASC,
-  SORT_LIKES_DESC,
-  SORT_LIKES_ASC
-];
-
 sortBy = [
   SORT_DATE_DESC,
   SORT_DATE_ASC,

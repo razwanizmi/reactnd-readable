@@ -4,13 +4,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Feed, NotFound } from "../../components";
 import * as categoriesActionCreators from "../../redux/modules/categories";
+import * as sortByActionCreators from "../../redux/modules/sortBy";
 
 class FeedContainer extends Component {
   static propTypes = {
     categories: PropTypes.object.isRequired,
+    getAndHandleCategories: PropTypes.func.isRequired,
     posts: PropTypes.object.isRequired,
-    sortBy: PropTypes.string.isRequired,
-    getAndHandleCategories: PropTypes.func.isRequired
+    setSortBy: PropTypes.func.isRequired,
+    sortBy: PropTypes.string.isRequired
   };
 
   componentDidMount() {
@@ -29,6 +31,7 @@ class FeedContainer extends Component {
         categories={this.props.categories}
         posts={this.props.posts}
         categoryId={categoryId}
+        setSortBy={this.props.setSortBy}
         sortBy={this.props.sortBy}
       />
     );
@@ -44,7 +47,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(categoriesActionCreators, dispatch);
+  return bindActionCreators(
+    { ...categoriesActionCreators, ...sortByActionCreators },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedContainer);

@@ -36,7 +36,7 @@ Categories.propTypes = {
   selected: PropTypes.string.isRequired
 };
 
-const Feed = ({ categories, categoryId, posts, sortBy }) => {
+const Feed = ({ categories, categoryId, posts, setSortBy, sortBy }) => {
   return (
     <div>
       <Header
@@ -51,9 +51,13 @@ const Feed = ({ categories, categoryId, posts, sortBy }) => {
                 <h4>Feed</h4>
               </div>
               <div className="col-xs-2 text-right mt-1">
-                <select className="sort-select">
+                <select
+                  className="sort-select"
+                  value={sortBy}
+                  onChange={e => setSortBy(e.target.value)}
+                >
                   <option value="none" disabled>
-                    Order by
+                    Sort by
                   </option>
                   <option value="dateDesc">Date (latest)</option>
                   <option value="dateAsc">Date (oldest)</option>
@@ -78,6 +82,7 @@ Feed.propTypes = {
   categories: PropTypes.object.isRequired,
   categoryId: PropTypes.string.isRequired,
   posts: PropTypes.object.isRequired,
+  setSortBy: PropTypes.func.isRequired,
   sortBy: PropTypes.string.isRequired
 };
 

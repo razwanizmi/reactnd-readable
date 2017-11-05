@@ -2,7 +2,7 @@ const ADD_POST = "ADD_POST";
 const ADD_POSTS = "ADD_POSTS";
 const UPVOTE_POST = "UPVOTE_POST";
 const DOWNVOTE_POST = "DOWNVOTE_POST";
-const DELETE_POST = "DELETE_POST";
+const REMOVE_POST = "REMOVE_POST";
 
 const addPost = post => {
   return {
@@ -32,9 +32,9 @@ const downVotePost = postId => {
   };
 };
 
-const deletePost = postId => {
+const removePost = postId => {
   return {
-    type: DELETE_POST,
+    type: REMOVE_POST,
     postId
   };
 };
@@ -67,7 +67,7 @@ const posts = (state = {}, action) => {
           voteScore: state[action.postId].voteScore - 1
         }
       };
-    case DELETE_POST:
+    case REMOVE_POST:
       return {
         ...state,
         [action.postId]: undefined

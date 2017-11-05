@@ -2,7 +2,7 @@ const ADD_COMMENT = "ADD_COMMENT";
 const ADD_COMMENTS = "ADD_COMMENTS";
 const UPVOTE_COMMENT = "UPVOTE_COMMENT";
 const DOWNVOTE_COMMENT = "DOWNVOTE_COMMENT";
-const DELETE_COMMENT = "DELETE_COMMENT";
+const REMOVE_COMMENT = "REMOVE_COMMENT";
 
 const addComment = comment => {
   return {
@@ -32,9 +32,9 @@ const downVoteComment = commentId => {
   };
 };
 
-const deleteComment = commentId => {
+const removeComment = commentId => {
   return {
-    type: DELETE_COMMENT,
+    type: REMOVE_COMMENT,
     commentId
   };
 };
@@ -67,7 +67,7 @@ const comments = (state = {}, action) => {
           voteScore: state[action.commentId].voteScore - 1
         }
       };
-    case DELETE_COMMENT:
+    case REMOVE_COMMENT:
       return {
         ...state,
         [action.commentId]: undefined

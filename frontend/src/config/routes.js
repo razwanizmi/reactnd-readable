@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Feed, NavBar } from "../components";
+import { FeedContainer } from "../containers";
+import { NavBar } from "../components";
 
 const getRoutes = () => {
   return (
@@ -8,7 +9,8 @@ const getRoutes = () => {
       <div>
         <NavBar />
         <Switch>
-          <Route component={Feed} />
+          <Route path="/:categoryId" component={FeedContainer} />
+          <Route component={FeedContainer} />
         </Switch>
       </div>
     </BrowserRouter>

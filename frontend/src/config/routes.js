@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { HelloWorld, NavBar } from "../components";
+import { Feed, NavBar } from "../components";
 
 const getRoutes = () => {
   return (
@@ -8,7 +8,7 @@ const getRoutes = () => {
       <div>
         <NavBar />
         <Switch>
-          <Route component={HelloWorld} />
+          <Route component={Feed} />
         </Switch>
       </div>
     </BrowserRouter>

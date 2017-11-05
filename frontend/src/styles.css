@@ -10,6 +10,25 @@ body {
   padding: 0;
 }
 
+a:focus,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+/* SPACES  */
+.m-0 {
+  margin: 0;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
 /* COLORS */
 
 /* Success #dff0d8 */
@@ -24,15 +43,49 @@ body {
 
 /* Navbar */
 .navbar {
-  margin: 0
+  margin: 0;
 }
 
-.navbar a, .navbar a:hover {
+.navbar a,
+.navbar a:focus,
+.navbar a:hover,
+.navbar a:active {
   color: #fff;
-  text-decoration: none;
 }
 
 .navbar-nav {
   padding: 15px;
   margin: 0;
+}
+
+/* Categories List */
+.cat-list {
+  background: #ecf0f1;
+  list-style-type: none;
+  padding: 1.5rem 0 1rem;
+}
+
+.cat-list .active {
+  background: #fff;
+  color: #27ae60;
+}
+
+.btn-cat {
+  background: #27ae60;
+  border-radius: 3rem;
+  color: #fff;
+  width: 10rem;
+}
+
+.btn-cat:focus,
+.btn-cat:hover,
+.btn-cat:active {
+  background: #fff;
+  color: #27ae60;
+}
+
+/* Sort Selector */
+.sort-select {
+  height: 2.5rem;
+  width: 100%;
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Feed } from "../../components";
+import { Feed, NotFound } from "../../components";
 import * as categoriesActionCreators from "../../redux/modules/categories";
 
 class FeedContainer extends Component {
@@ -18,14 +18,18 @@ class FeedContainer extends Component {
   }
 
   render() {
-    const selectedCategory = this.props.match.params.categoryId || "all";
+    const categoryId = this.props.match.params.categoryId || "all";
+
+    if (categoryId !== "all" && !this.props.categories[categoryId]) {
+      return <NotFound />;
+    }
 
     return (
       <Feed
         categories={this.props.categories}
         posts={this.props.posts}
-        sortBy={this.props.posts}
-        selectedCategory={selectedCategory}
+        categoryId={categoryId}
+        sortBy={this.props.sortBy}
       />
     );
   }

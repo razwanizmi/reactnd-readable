@@ -20,6 +20,7 @@ const Categories = ({ categories, selected }) => {
       </Link>
       {categoryIds.map(categoryId => (
         <Link
+          key={categoryId}
           className={`btn btn-cat mb-1 ${selected === categoryId && "active"}`}
           to={`/${categoryId}`}
         >
@@ -32,10 +33,10 @@ const Categories = ({ categories, selected }) => {
 
 Categories.propTypes = {
   categories: PropTypes.object.isRequired,
-  selected: PropTypes.string
+  selected: PropTypes.string.isRequired
 };
 
-const Feed = ({ categories, selectedCategory }) => {
+const Feed = ({ categories, categoryId, posts, sortBy }) => {
   return (
     <div>
       <Header
@@ -65,12 +66,19 @@ const Feed = ({ categories, selectedCategory }) => {
             <hr className="m-0" />
           </div>
           <div className="col-xs-2 text-center cat-list">
-            <Categories categories={categories} selected={selectedCategory} />
+            <Categories categories={categories} selected={categoryId} />
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+Feed.propTypes = {
+  categories: PropTypes.object.isRequired,
+  categoryId: PropTypes.string.isRequired,
+  posts: PropTypes.object.isRequired,
+  sortBy: PropTypes.string.isRequired
 };
 
 export default Feed;

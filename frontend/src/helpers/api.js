@@ -27,3 +27,9 @@ export const getCategories = () => {
 export const getPosts = () => {
   return axios.get(`${api}/posts`, { headers }).then(response => response.data);
 };
+
+export const postPostVote = (postId, option) => {
+  return axios
+    .post(`${api}/posts/${postId}`, { option }, { headers })
+    .then(response => console.log(response.data));
+};

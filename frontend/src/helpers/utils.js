@@ -33,10 +33,6 @@ const filterPosts = (posts, filter) => {
 
 const sortPostsIds = (posts, sort) => {
   switch (sort) {
-    case "dateDesc":
-      return Object.keys(posts).sort(
-        (a, b) => posts[b].timestamp - posts[a].timestamp
-      );
     case "dateAsc":
       return Object.keys(posts).sort(
         (a, b) => posts[a].timestamp - posts[b].timestamp
@@ -48,6 +44,10 @@ const sortPostsIds = (posts, sort) => {
     case "likesAsc":
       return Object.keys(posts).sort(
         (a, b) => posts[a].voteScore - posts[b].voteScore
+      );
+    default:
+      return Object.keys(posts).sort(
+        (a, b) => posts[b].timestamp - posts[a].timestamp
       );
   }
 };

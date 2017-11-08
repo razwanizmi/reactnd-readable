@@ -13,6 +13,7 @@ class FeedContainer extends Component {
     categories: PropTypes.object.isRequired,
     getAndHandleCategories: PropTypes.func.isRequired,
     getAndHandlePosts: PropTypes.func.isRequired,
+    postAndHandlePostVote: PropTypes.func.isRequired,
     posts: PropTypes.object.isRequired,
     setSortBy: PropTypes.func.isRequired,
     sortBy: PropTypes.string.isRequired
@@ -24,7 +25,14 @@ class FeedContainer extends Component {
   }
 
   render() {
-    const { categories, posts, setSortBy, sortBy } = this.props;
+    const {
+      categories,
+      postAndHandlePostVote,
+      posts,
+      setSortBy,
+      sortBy
+    } = this.props;
+
     const categoryId = this.props.match.params.categoryId || "all";
 
     if (categoryId !== "all" && !this.props.categories[categoryId]) {
@@ -37,6 +45,7 @@ class FeedContainer extends Component {
       <Feed
         categories={categories}
         feed={feed}
+        postAndHandlePostVote={postAndHandlePostVote}
         posts={posts}
         categoryId={categoryId}
         setSortBy={setSortBy}

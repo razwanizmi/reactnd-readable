@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Header, Loading, Posts } from "../";
+import { Header, Loading, Posts, Votes } from "../";
 import { formatTimestamp } from "../../helpers/utils";
 
 const Categories = ({ categories, selected }) => {
@@ -37,7 +37,7 @@ Categories.propTypes = {
   selected: PropTypes.string.isRequired
 };
 
-const PostsList = ({ feed, posts }) => {
+const PostsList = ({ feed, postAndHandlePostVote, posts }) => {
   if (feed.length === 0) {
     return (
       <div className="row">
@@ -54,12 +54,12 @@ const PostsList = ({ feed, posts }) => {
       {feed.map(postId => {
         const post = posts[postId];
 
-        const handleDownVote = () => {
-          console.log(`Down voted post ${postId}!`);
+        const handleUpVote = () => {
+          postAndHandlePostVote(postId, "upVote");
         };
 
-        const handleUpVote = () => {
-          console.log(`Up voted post ${postId}!`);
+        const handleDownVote = () => {
+          postAndHandlePostVote(postId, "downVote");
         };
 
         return (
@@ -76,22 +76,11 @@ const PostsList = ({ feed, posts }) => {
                 </h3>
               </div>
               <div className="col-xs-2 mt-4">
-                <span
-                  className="mx-1 pointer text-red"
-                  onClick={handleDownVote}
-                >
-                  ↓
-                </span>
-                <span className="mx-1" role="img" aria-label="cat">
-                  😺
-                </span>
-                <span className="mx-1">{post.voteScore}</span>
-                <span
-                  className="mx-1 pointer text-green"
-                  onClick={handleUpVote}
-                >
-                  ↑
-                </span>
+                <Votes
+                  voteScore={post.voteScore}
+                  handleUpVote={handleUpVote}
+                  handleDownVote={handleDownVote}
+                />
               </div>
               <div className="col-xs-2 mt-4 text-right">
                 <p>{formatTimestamp(post.timestamp)}</p>
@@ -101,6 +90,14 @@ const PostsList = ({ feed, posts }) => {
               <div className="col-xs-12">
                 <p className="text-1">
                   By <span className="text-blue">{post.author}</span>
+                </p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-12">
+                <p className="text-1">
+                  🗣
+                  <span className="mx-1">{post.commentCount}</span>
                 </p>
               </div>
             </div>
@@ -118,10 +115,19 @@ const PostsList = ({ feed, posts }) => {
 
 PostsList.propTypes = {
   feed: PropTypes.array.isRequired,
+  postAndHandlePostVote: PropTypes.func.isRequired,
   posts: PropTypes.object.isRequired
 };
 
-const Feed = ({ categories, categoryId, feed, posts, setSortBy, sortBy }) => {
+const Feed = ({
+  categories,
+  categoryId,
+  feed,
+  postAndHandlePostVote,
+  posts,
+  setSortBy,
+  sortBy
+}) => {
   return (
     <div>
       <Header
@@ -151,7 +157,11 @@ const Feed = ({ categories, categoryId, feed, posts, setSortBy, sortBy }) => {
                 </select>
               </div>
             </div>
-            <PostsList feed={feed} posts={posts} />
+            <PostsList
+              feed={feed}
+              postAndHandlePostVote={postAndHandlePostVote}
+              posts={posts}
+            />
           </div>
           <div className="col-xs-2 text-center cat-list">
             <Categories categories={categories} selected={categoryId} />
@@ -166,6 +176,7 @@ Feed.propTypes = {
   categories: PropTypes.object.isRequired,
   categoryId: PropTypes.string.isRequired,
   feed: PropTypes.array.isRequired,
+  postAndHandlePostVote: PropTypes.func.isRequired,
   posts: PropTypes.object.isRequired,
   setSortBy: PropTypes.func.isRequired,
   sortBy: PropTypes.string.isRequired

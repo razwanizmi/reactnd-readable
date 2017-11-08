@@ -1,4 +1,4 @@
-import { getPosts } from "../../helpers/api";
+import { getPosts, postPostVote } from "../../helpers/api";
 import { formatArrayToObject } from "../../helpers/utils";
 
 const ADD_POST = "ADD_POST";
@@ -47,6 +47,19 @@ export const getAndHandlePosts = () => {
     getPosts()
       .then(posts => formatArrayToObject(posts))
       .then(formattedPosts => dispatch(addPosts(formattedPosts)));
+  };
+};
+
+export const postAndHandlePostVote = (postId, option) => {
+  return dispatch => {
+    postPostVote(postId, option).then(() => {
+      if (option === "upVote") {
+        dispatch(upVotePost(postId));
+      }
+      if (option === "downVote") {
+        dispatch(downVotePost(postId));
+      }
+    });
   };
 };
 

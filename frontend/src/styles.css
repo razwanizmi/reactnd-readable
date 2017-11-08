@@ -16,17 +16,43 @@ a:active {
   text-decoration: none;
 }
 
+/* TYPOGRAPHY */
+.justify {
+  text-align: justify;
+}
+
+.text-1 {
+  font-size: 1rem;
+}
+
 /* SPACES  */
 .m-0 {
   margin: 0;
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 2.5rem;
 }
 
 .mb-1 {
   margin-bottom: 0.5rem;
 }
 
-.mt-1 {
-  margin-top: 0.5rem;
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.mx-1 {
+  margin: 0 0.5rem;
+}
+
+/* EFFECTS */
+.pointer {
+  cursor: pointer;
 }
 
 /* COLORS */
@@ -37,6 +63,18 @@ a:active {
 /* Danger #f2dede */
 .blue {
   background: #3498db;
+}
+
+.text-blue {
+  color: #3498db;
+}
+
+.text-green {
+  color: #27ae60;
+}
+
+.text-red {
+  color: #e74c3c;
 }
 
 /* CUSTOM */

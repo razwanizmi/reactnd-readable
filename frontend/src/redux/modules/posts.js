@@ -1,3 +1,6 @@
+import { getPosts } from "../../helpers/api";
+import { formatArrayToObject } from "../../helpers/utils";
+
 const ADD_POST = "ADD_POST";
 const ADD_POSTS = "ADD_POSTS";
 const UPVOTE_POST = "UPVOTE_POST";
@@ -36,6 +39,14 @@ const removePost = postId => {
   return {
     type: REMOVE_POST,
     postId
+  };
+};
+
+export const getAndHandlePosts = () => {
+  return dispatch => {
+    getPosts()
+      .then(posts => formatArrayToObject(posts))
+      .then(formattedPosts => dispatch(addPosts(formattedPosts)));
   };
 };
 

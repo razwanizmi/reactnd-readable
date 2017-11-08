@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Header, Loading } from "../";
+import { Header, Loading, Posts } from "../";
+import { formatTimestamp } from "../../helpers/utils";
 
 const Categories = ({ categories, selected }) => {
   const categoryIds = Object.keys(categories);
@@ -36,7 +37,91 @@ Categories.propTypes = {
   selected: PropTypes.string.isRequired
 };
 
-const Feed = ({ categories, categoryId, posts, setSortBy, sortBy }) => {
+const PostsList = ({ feed, posts }) => {
+  if (feed.length === 0) {
+    return (
+      <div className="row">
+        <div className="col-xs-12">
+          <hr className="m-0" />
+          <p className="mt-4">No posts yet</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {feed.map(postId => {
+        const post = posts[postId];
+
+        const handleDownVote = () => {
+          console.log(`Down voted post ${postId}!`);
+        };
+
+        const handleUpVote = () => {
+          console.log(`Up voted post ${postId}!`);
+        };
+
+        return (
+          <div key={postId}>
+            <div className="row">
+              <div className="col-xs-12">
+                <hr className="m-0" />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-8">
+                <h3>
+                  <Link to={`/${post.category}/${post.id}`}>{post.title}</Link>
+                </h3>
+              </div>
+              <div className="col-xs-2 mt-4">
+                <span
+                  className="mx-1 pointer text-red"
+                  onClick={handleDownVote}
+                >
+                  ↓
+                </span>
+                <span className="mx-1" role="img" aria-label="cat">
+                  😺
+                </span>
+                <span className="mx-1">{post.voteScore}</span>
+                <span
+                  className="mx-1 pointer text-green"
+                  onClick={handleUpVote}
+                >
+                  ↑
+                </span>
+              </div>
+              <div className="col-xs-2 mt-4 text-right">
+                <p>{formatTimestamp(post.timestamp)}</p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-12">
+                <p className="text-1">
+                  By <span className="text-blue">{post.author}</span>
+                </p>
+              </div>
+            </div>
+            <div className="row mb-2">
+              <div className="col-xs-12">
+                <p className="justify">{post.body}</p>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+PostsList.propTypes = {
+  feed: PropTypes.array.isRequired,
+  posts: PropTypes.object.isRequired
+};
+
+const Feed = ({ categories, categoryId, feed, posts, setSortBy, sortBy }) => {
   return (
     <div>
       <Header
@@ -66,8 +151,7 @@ const Feed = ({ categories, categoryId, posts, setSortBy, sortBy }) => {
                 </select>
               </div>
             </div>
-
-            <hr className="m-0" />
+            <PostsList feed={feed} posts={posts} />
           </div>
           <div className="col-xs-2 text-center cat-list">
             <Categories categories={categories} selected={categoryId} />
@@ -81,6 +165,7 @@ const Feed = ({ categories, categoryId, posts, setSortBy, sortBy }) => {
 Feed.propTypes = {
   categories: PropTypes.object.isRequired,
   categoryId: PropTypes.string.isRequired,
+  feed: PropTypes.array.isRequired,
   posts: PropTypes.object.isRequired,
   setSortBy: PropTypes.func.isRequired,
   sortBy: PropTypes.string.isRequired

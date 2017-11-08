@@ -23,3 +23,7 @@ export const getCategories = () => {
     .get(`${api}/categories`, { headers })
     .then(response => response.data.categories);
 };
+
+export const getPosts = () => {
+  return axios.get(`${api}/posts`, { headers }).then(response => response.data);
+};

@@ -46,12 +46,6 @@ const validate = values => {
   if (!values.title) {
     errors.title = "Please enter a title";
   }
-  if (!values.author) {
-    errors.author = "Please enter an author name";
-  }
-  if (!values.category) {
-    errors.category = "Please select a category";
-  }
   if (!values.body) {
     errors.body = "Please enter some content in the body";
   }

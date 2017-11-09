@@ -39,7 +39,7 @@ Categories.propTypes = {
   selected: PropTypes.string.isRequired
 };
 
-const PostsList = ({ feed, postAndHandlePostVote, posts }) => {
+const PostsList = ({ feed, createAndHandlePostVote, posts }) => {
   if (feed.length === 0) {
     return (
       <div className="row">
@@ -57,11 +57,11 @@ const PostsList = ({ feed, postAndHandlePostVote, posts }) => {
         const post = posts[postId];
 
         const handleUpVote = () => {
-          postAndHandlePostVote(postId, "upVote");
+          createAndHandlePostVote(postId, "upVote");
         };
 
         const handleDownVote = () => {
-          postAndHandlePostVote(postId, "downVote");
+          createAndHandlePostVote(postId, "downVote");
         };
 
         return (
@@ -128,7 +128,7 @@ const PostsList = ({ feed, postAndHandlePostVote, posts }) => {
 
 PostsList.propTypes = {
   feed: PropTypes.array.isRequired,
-  postAndHandlePostVote: PropTypes.func.isRequired,
+  createAndHandlePostVote: PropTypes.func.isRequired,
   posts: PropTypes.object.isRequired
 };
 
@@ -136,7 +136,7 @@ const Feed = ({
   categories,
   categoryId,
   feed,
-  postAndHandlePostVote,
+  createAndHandlePostVote,
   posts,
   setSortBy,
   sortBy
@@ -172,7 +172,7 @@ const Feed = ({
             </div>
             <PostsList
               feed={feed}
-              postAndHandlePostVote={postAndHandlePostVote}
+              createAndHandlePostVote={createAndHandlePostVote}
               posts={posts}
             />
           </div>
@@ -189,7 +189,7 @@ Feed.propTypes = {
   categories: PropTypes.object.isRequired,
   categoryId: PropTypes.string.isRequired,
   feed: PropTypes.array.isRequired,
-  postAndHandlePostVote: PropTypes.func.isRequired,
+  createAndHandlePostVote: PropTypes.func.isRequired,
   posts: PropTypes.object.isRequired,
   setSortBy: PropTypes.func.isRequired,
   sortBy: PropTypes.string.isRequired

@@ -3,7 +3,7 @@ import axios from "axios";
 const api = "http://localhost:3001";
 
 const generateId = () => {
-  Math.random()
+  return Math.random()
     .toString(36)
     .substr(-8);
 };
@@ -18,18 +18,27 @@ const headers = {
   Authorization: token
 };
 
-export const getCategories = () => {
+export const fetchCategories = () => {
   return axios
     .get(`${api}/categories`, { headers })
     .then(response => response.data.categories);
 };
 
-export const getPosts = () => {
+export const fetchPosts = () => {
   return axios.get(`${api}/posts`, { headers }).then(response => response.data);
 };
 
-export const postPostVote = (postId, option) => {
+export const createPost = post => {
+  const id = generateId();
+  const timestamp = Date.now();
+
+  return axios
+    .post(`${api}/posts`, { ...post, timestamp, id }, { headers })
+    .then(response => response.data);
+};
+
+export const createPostVote = (postId, option) => {
   return axios
     .post(`${api}/posts/${postId}`, { option }, { headers })
-    .then(response => console.log(response.data));
+    .then(response => response.data);
 };

@@ -1,4 +1,4 @@
-import { getPosts, postPostVote } from "../../helpers/api";
+import { fetchPosts, createPost, createPostVote } from "../../helpers/api";
 import { formatArrayToObject } from "../../helpers/utils";
 
 const ADD_POST = "ADD_POST";
@@ -42,17 +42,25 @@ const removePost = postId => {
   };
 };
 
-export const getAndHandlePosts = () => {
+export const fetchAndHandlePosts = () => {
   return dispatch => {
-    getPosts()
+    fetchPosts()
       .then(posts => formatArrayToObject(posts))
       .then(formattedPosts => dispatch(addPosts(formattedPosts)));
   };
 };
 
-export const postAndHandlePostVote = (postId, option) => {
+export const createAndHandlePost = (post, callback) => {
   return dispatch => {
-    postPostVote(postId, option).then(() => {
+    createPost(post)
+      .then(postWithId => dispatch(addPost(postWithId)))
+      .then(() => callback());
+  };
+};
+
+export const createAndHandlePostVote = (postId, option) => {
+  return dispatch => {
+    createPostVote(postId, option).then(() => {
       if (option === "upVote") {
         dispatch(upVotePost(postId));
       }

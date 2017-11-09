@@ -1,4 +1,4 @@
-import { getCategories } from "../../helpers/api";
+import { fetchCategories } from "../../helpers/api";
 import { formatCategories } from "../../helpers/utils";
 
 const ADD_CATEGORIES = "ADD_CATEGORIES";
@@ -10,9 +10,9 @@ const addCategories = categories => {
   };
 };
 
-export const getAndHandleCategories = () => {
+export const fetchAndHandleCategories = () => {
   return dispatch => {
-    getCategories()
+    fetchCategories()
       .then(categories => formatCategories(categories))
       .then(formattedCategories =>
         dispatch(addCategories(formattedCategories))

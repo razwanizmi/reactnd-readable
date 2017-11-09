@@ -11,23 +11,23 @@ import { generateFeed } from "../../helpers/utils";
 class FeedContainer extends Component {
   static propTypes = {
     categories: PropTypes.object.isRequired,
-    getAndHandleCategories: PropTypes.func.isRequired,
-    getAndHandlePosts: PropTypes.func.isRequired,
-    postAndHandlePostVote: PropTypes.func.isRequired,
+    fetchAndHandleCategories: PropTypes.func.isRequired,
+    fetchAndHandlePosts: PropTypes.func.isRequired,
+    createAndHandlePostVote: PropTypes.func.isRequired,
     posts: PropTypes.object.isRequired,
     setSortBy: PropTypes.func.isRequired,
     sortBy: PropTypes.string.isRequired
   };
 
   componentDidMount() {
-    this.props.getAndHandleCategories();
-    this.props.getAndHandlePosts();
+    this.props.fetchAndHandleCategories();
+    this.props.fetchAndHandlePosts();
   }
 
   render() {
     const {
       categories,
-      postAndHandlePostVote,
+      createAndHandlePostVote,
       posts,
       setSortBy,
       sortBy
@@ -45,7 +45,7 @@ class FeedContainer extends Component {
       <Feed
         categories={categories}
         feed={feed}
-        postAndHandlePostVote={postAndHandlePostVote}
+        createAndHandlePostVote={createAndHandlePostVote}
         posts={posts}
         categoryId={categoryId}
         setSortBy={setSortBy}

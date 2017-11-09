@@ -8,28 +8,33 @@ import { PostForm } from "../../components";
 import * as categoriesActionCreators from "../../redux/modules/categories";
 import * as postsActionCreators from "../../redux/modules/posts";
 
-class PostFormContainer extends Component {
+class EditPostContainer extends Component {
   static propTypes = {
     categories: PropTypes.object.isRequired,
-    createAndHandlePost: PropTypes.func.isRequired,
-    fetchAndHandleCategories: PropTypes.func.isRequired
+    fetchAndHandleCategories: PropTypes.func.isRequired,
+    fetchAndHandlePost: PropTypes.func.isRequired,
+    updateAndHandlePost: PropTypes.func.isRequired
   };
 
   componentWillMount() {
     this.props.fetchAndHandleCategories();
+    this.props.fetchAndHandlePost(this.props.match.params.postId, post =>
+      this.props.initialize(post)
+    );
   }
 
   onSubmit = values => {
-    this.props.createAndHandlePost(values, () => this.props.history.push("/"));
+    this.props.updateAndHandlePost(values, () => this.props.history.push("/"));
   };
 
   render() {
-    const { handleSubmit } = this.props;
+    const { categories, handleSubmit, initialized } = this.props;
 
     return (
       <PostForm
-        categories={this.props.categories}
+        categories={categories}
         handleSubmit={handleSubmit(this.onSubmit)}
+        initialized={initialized}
       />
     );
   }
@@ -56,7 +61,8 @@ const validate = values => {
 
 const mapStateToProps = state => {
   return {
-    categories: state.categories
+    categories: state.categories,
+    posts: state.posts
   };
 };
 
@@ -70,4 +76,4 @@ const mapDispatchToProps = dispatch => {
 export default reduxForm({
   form: "PostForm",
   validate
-})(connect(mapStateToProps, mapDispatchToProps)(PostFormContainer));
+})(connect(mapStateToProps, mapDispatchToProps)(EditPostContainer));

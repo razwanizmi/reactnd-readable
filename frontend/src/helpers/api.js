@@ -28,12 +28,30 @@ export const fetchPosts = () => {
   return axios.get(`${api}/posts`, { headers }).then(response => response.data);
 };
 
+export const fetchPost = postId => {
+  return axios
+    .get(`${api}/posts/${postId}`, { headers })
+    .then(response => response.data);
+};
+
 export const createPost = post => {
   const id = generateId();
   const timestamp = Date.now();
 
   return axios
     .post(`${api}/posts`, { ...post, timestamp, id }, { headers })
+    .then(response => response.data);
+};
+
+export const updatePost = post => {
+  return axios
+    .put(`${api}/posts/${post.id}`, { ...post }, { headers })
+    .then(response => response.data);
+};
+
+export const deletePost = postId => {
+  return axios
+    .delete(`${api}/posts/${postId}`, { headers })
     .then(response => response.data);
 };
 

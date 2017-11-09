@@ -20,7 +20,9 @@ const renderField = field => {
             Select category
           </option>
           {Object.keys(field.options).map(categoryId => (
-            <option value={categoryId}>{field.options[categoryId]}</option>
+            <option key={categoryId} value={categoryId}>
+              {field.options[categoryId]}
+            </option>
           ))}
         </select>
       )}
@@ -32,10 +34,10 @@ const renderField = field => {
   );
 };
 
-const PostForm = ({ categories, handleSubmit }) => {
+const PostForm = ({ categories, handleSubmit, initialized }) => {
   return (
     <div className="container">
-      <h1 className="text-center">New Post</h1>
+      <h1 className="text-center">{initialized ? "Edit Post" : "New Post"}</h1>
       <form onSubmit={handleSubmit}>
         <Field
           name="title"
@@ -43,22 +45,26 @@ const PostForm = ({ categories, handleSubmit }) => {
           label="Title"
           type="input"
         />
-        <Field
-          name="author"
-          component={renderField}
-          label="Author"
-          type="input"
-        />
-        <Field
-          name="category"
-          component={renderField}
-          label="Category"
-          type="select"
-          options={categories}
-        />
+        {!initialized && (
+          <Field
+            name="author"
+            component={renderField}
+            label="Author"
+            type="input"
+          />
+        )}
+        {!initialized && (
+          <Field
+            name="category"
+            component={renderField}
+            label="Category"
+            type="select"
+            options={categories}
+          />
+        )}
         <Field name="body" component={renderField} label="Body" type="area" />
         <button type="submit" className="btn btn-green">
-          Save
+          {initialized ? "Update" : "Save"}
         </button>
         <Link className="btn btn-gray ml-2" to="/">
           Cancel
@@ -70,7 +76,8 @@ const PostForm = ({ categories, handleSubmit }) => {
 
 PostForm.propTypes = {
   categories: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  initialized: PropTypes.bool.isRequired
 };
 
 export default PostForm;

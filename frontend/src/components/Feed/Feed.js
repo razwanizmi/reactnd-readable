@@ -39,7 +39,13 @@ Categories.propTypes = {
   selected: PropTypes.string.isRequired
 };
 
-const PostsList = ({ feed, createAndHandlePostVote, posts }) => {
+const PostsList = ({
+  feed,
+  createAndHandlePostVote,
+  history,
+  deleteAndHandlePost,
+  posts
+}) => {
   if (feed.length === 0) {
     return (
       <div className="row">
@@ -63,6 +69,9 @@ const PostsList = ({ feed, createAndHandlePostVote, posts }) => {
         const handleDownVote = () => {
           createAndHandlePostVote(postId, "downVote");
         };
+
+        const handleDelete = postId =>
+          deleteAndHandlePost(postId, () => history.push("/"));
 
         return (
           <div key={postId}>
@@ -109,7 +118,10 @@ const PostsList = ({ feed, createAndHandlePostVote, posts }) => {
                 >
                   Edit
                 </Link>
-                <span className="btn btn-tiny btn-red text-0-75 ml-1">
+                <span
+                  className="btn btn-tiny btn-red text-0-75 ml-1"
+                  onClick={() => handleDelete(postId)}
+                >
                   Delete
                 </span>
               </div>
@@ -129,6 +141,8 @@ const PostsList = ({ feed, createAndHandlePostVote, posts }) => {
 PostsList.propTypes = {
   feed: PropTypes.array.isRequired,
   createAndHandlePostVote: PropTypes.func.isRequired,
+  deleteAndHandlePost: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
   posts: PropTypes.object.isRequired
 };
 
@@ -137,6 +151,8 @@ const Feed = ({
   categoryId,
   feed,
   createAndHandlePostVote,
+  deleteAndHandlePost,
+  history,
   posts,
   setSortBy,
   sortBy
@@ -173,6 +189,8 @@ const Feed = ({
             <PostsList
               feed={feed}
               createAndHandlePostVote={createAndHandlePostVote}
+              history={history}
+              deleteAndHandlePost={deleteAndHandlePost}
               posts={posts}
             />
           </div>
@@ -190,6 +208,8 @@ Feed.propTypes = {
   categoryId: PropTypes.string.isRequired,
   feed: PropTypes.array.isRequired,
   createAndHandlePostVote: PropTypes.func.isRequired,
+  deleteAndHandlePost: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
   posts: PropTypes.object.isRequired,
   setSortBy: PropTypes.func.isRequired,
   sortBy: PropTypes.string.isRequired

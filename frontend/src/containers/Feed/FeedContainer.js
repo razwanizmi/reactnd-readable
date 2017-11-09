@@ -11,6 +11,7 @@ import { generateFeed } from "../../helpers/utils";
 class FeedContainer extends Component {
   static propTypes = {
     categories: PropTypes.object.isRequired,
+    deleteAndHandlePost: PropTypes.func.isRequired,
     fetchAndHandleCategories: PropTypes.func.isRequired,
     fetchAndHandlePosts: PropTypes.func.isRequired,
     createAndHandlePostVote: PropTypes.func.isRequired,
@@ -28,6 +29,8 @@ class FeedContainer extends Component {
     const {
       categories,
       createAndHandlePostVote,
+      deleteAndHandlePost,
+      history,
       posts,
       setSortBy,
       sortBy
@@ -46,8 +49,10 @@ class FeedContainer extends Component {
         categories={categories}
         feed={feed}
         createAndHandlePostVote={createAndHandlePostVote}
+        deleteAndHandlePost={deleteAndHandlePost}
         posts={posts}
         categoryId={categoryId}
+        history={history}
         setSortBy={setSortBy}
         sortBy={sortBy}
       />

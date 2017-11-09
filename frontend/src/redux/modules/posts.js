@@ -1,4 +1,11 @@
-import { fetchPosts, createPost, createPostVote } from "../../helpers/api";
+import {
+  createPost,
+  createPostVote,
+  deletePost,
+  fetchPost,
+  fetchPosts,
+  updatePost
+} from "../../helpers/api";
 import { formatArrayToObject } from "../../helpers/utils";
 
 const ADD_POST = "ADD_POST";
@@ -50,10 +57,35 @@ export const fetchAndHandlePosts = () => {
   };
 };
 
+export const fetchAndHandlePost = (postId, callback) => {
+  return dispatch => {
+    fetchPost(postId).then(post => {
+      dispatch(addPost(post));
+      callback(post);
+    });
+  };
+};
+
 export const createAndHandlePost = (post, callback) => {
   return dispatch => {
     createPost(post)
       .then(postWithId => dispatch(addPost(postWithId)))
+      .then(() => callback());
+  };
+};
+
+export const updateAndHandlePost = (post, callback) => {
+  return dispatch => {
+    updatePost(post)
+      .then(post => dispatch(addPost(post)))
+      .then(() => callback());
+  };
+};
+
+export const deleteAndHandlePost = (postId, callback) => {
+  return dispatch => {
+    deletePost(postId)
+      .then(() => dispatch(removePost(postId)))
       .then(() => callback());
   };
 };
@@ -100,10 +132,12 @@ const posts = (state = {}, action) => {
         }
       };
     case REMOVE_POST:
-      return {
-        ...state,
-        [action.postId]: undefined
-      };
+      return Object.keys(state).reduce((accumulator, postId) => {
+        if (postId !== action.postId) {
+          accumulator[postId] = state[postId];
+        }
+        return accumulator;
+      }, {});
     default:
       return state;
   }

@@ -21,6 +21,10 @@ a:active {
   text-align: justify;
 }
 
+.text-0-75 {
+  font-size: 0.75rem;
+}
+
 .text-1 {
   font-size: 1rem;
 }
@@ -46,6 +50,14 @@ a:active {
   margin-bottom: 1rem;
 }
 
+.ml-1 {
+  margin-left: 0.5rem;
+}
+
+.ml-2 {
+  margin-left: 1rem;
+}
+
 .mx-1 {
   margin: 0 0.5rem;
 }
@@ -53,6 +65,10 @@ a:active {
 /* EFFECTS */
 .pointer {
   cursor: pointer;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 /* COLORS */
@@ -75,6 +91,49 @@ a:active {
 
 .text-red {
   color: #e74c3c;
+}
+
+.btn {
+  border-radius: 3rem;
+}
+
+.btn-tiny {
+  height: 1.5rem;
+  padding: 0.25rem 1rem;
+}
+
+/* Buttons */
+.btn-gray {
+  background: #95a5a6;
+  color: #fff;
+}
+
+.btn-gray:focus,
+.btn-gray:hover,
+.btn-gray:active {
+  color: #fff;
+}
+
+.btn-green {
+  background: #27ae60;
+  color: #fff;
+}
+
+.btn-green:focus,
+.btn-green:hover,
+.btn-green:active {
+  color: #fff;
+}
+
+.btn-red {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.btn-red:focus,
+.btn-red:hover,
+.btn-red:active {
+  color: #fff;
 }
 
 /* CUSTOM */
@@ -109,9 +168,6 @@ a:active {
 }
 
 .btn-cat {
-  background: #27ae60;
-  border-radius: 3rem;
-  color: #fff;
   width: 10rem;
 }
 

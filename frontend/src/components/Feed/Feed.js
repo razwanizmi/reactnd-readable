@@ -14,7 +14,8 @@ const Categories = ({ categories, selected }) => {
   return (
     <div>
       <Link
-        className={`btn btn-cat mb-1 ${selected === "all" && "active"}`}
+        className={`btn btn-cat btn-green mb-1 ${selected === "all" &&
+          "active"}`}
         to="/"
       >
         All
@@ -22,7 +23,8 @@ const Categories = ({ categories, selected }) => {
       {categoryIds.map(categoryId => (
         <Link
           key={categoryId}
-          className={`btn btn-cat mb-1 ${selected === categoryId && "active"}`}
+          className={`btn btn-cat btn-green mb-1 ${selected === categoryId &&
+            "active"}`}
           to={`/${categoryId}`}
         >
           {categories[categoryId]}
@@ -94,11 +96,22 @@ const PostsList = ({ feed, postAndHandlePostVote, posts }) => {
               </div>
             </div>
             <div className="row">
-              <div className="col-xs-12">
+              <div className="col-xs-6">
                 <p className="text-1">
                   🗣
                   <span className="mx-1">{post.commentCount}</span>
                 </p>
+              </div>
+              <div className="col-xs-6 text-right">
+                <Link
+                  className="btn btn-tiny btn-gray text-0-75"
+                  to={`${post.category}/${post.id}/edit`}
+                >
+                  Edit
+                </Link>
+                <span className="btn btn-tiny btn-red text-0-75 ml-1">
+                  Delete
+                </span>
               </div>
             </div>
             <div className="row mb-2">

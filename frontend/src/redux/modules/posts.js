@@ -61,7 +61,9 @@ export const fetchAndHandlePost = (postId, callback) => {
   return dispatch => {
     fetchPost(postId).then(post => {
       dispatch(addPost(post));
-      callback(post);
+      if (callback) {
+        callback(post);
+      }
     });
   };
 };

@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {
   FeedContainer,
   EditPostContainer,
-  NewPostContainer
+  NewPostContainer,
+  ShowPostContainer
 } from "../containers";
 import { NavBar } from "../components";
 
@@ -18,6 +19,7 @@ const getRoutes = () => {
             path="/:categoryId/:postId/edit"
             component={EditPostContainer}
           />
+          <Route path="/:categoryId/:postId" component={ShowPostContainer} />
           <Route path="/:categoryId" component={FeedContainer} />
           <Route component={FeedContainer} />
         </Switch>

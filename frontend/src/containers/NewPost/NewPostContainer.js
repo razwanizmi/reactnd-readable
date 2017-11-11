@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { reduxForm } from "redux-form";
 import { PostForm } from "../../components";

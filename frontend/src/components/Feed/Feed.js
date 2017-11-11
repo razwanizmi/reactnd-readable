@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Header, Loading, Posts, Votes } from "../";
+import { Header, Loading, Votes } from "../";
 import { formatTimestamp } from "../../helpers/utils";
 
 const Categories = ({ categories, selected }) => {

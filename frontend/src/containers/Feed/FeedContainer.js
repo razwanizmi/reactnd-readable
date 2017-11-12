@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Feed, NotFound } from "../../components";
+import { Feed } from "../../components";
 import * as categoriesActionCreators from "../../redux/modules/categories";
 import * as postsActionCreators from "../../redux/modules/posts";
 import * as sortByActionCreators from "../../redux/modules/sortBy";
@@ -37,11 +37,6 @@ class FeedContainer extends Component {
     } = this.props;
 
     const categoryId = this.props.match.params.categoryId || "all";
-
-    if (categoryId !== "all" && !this.props.categories[categoryId]) {
-      return <NotFound />;
-    }
-
     const feed = generateFeed(posts, categoryId, sortBy);
 
     return (

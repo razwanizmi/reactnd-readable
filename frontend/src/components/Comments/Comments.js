@@ -24,7 +24,7 @@ const Comment = ({
 
   return (
     <div>
-      <div className="row mt-1">
+      <div className="row mt-3">
         <div className="col-xs-12">
           <p className="text-1">
             <span className="text-blue">{comment.author}</span>
@@ -32,13 +32,7 @@ const Comment = ({
           </p>
         </div>
       </div>
-      <div className="row">
-        <div className="col-xs-12">
-          <p className="justify">{comment.body}</p>
-        </div>
-      </div>
-
-      <div className="row mb-4">
+      <div className="row mb-2">
         <div className="col-xs-12">
           <div className="pull-left">
             <Votes
@@ -61,6 +55,11 @@ const Comment = ({
               Delete
             </span>
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-xs-12">
+          <p className="justify">{comment.body}</p>
         </div>
       </div>
     </div>
@@ -89,17 +88,7 @@ const Comments = ({
       <div className="col-xs-6">
         <div className="row">
           <div className="col-xs-12">
-            <div className="pull-left">
-              COMMENTS ({Object.keys(comments).length})
-            </div>
-            <div className="pull-right">
-              <Link
-                className="btn btn-tiny btn-green text-0-75 mb-1"
-                to={`/${post.category}/${post.id}/comments/new`}
-              >
-                Add a Comment
-              </Link>
-            </div>
+            COMMENTS ({Object.keys(comments).length})
           </div>
         </div>
         <hr className="m-0" />

@@ -1,8 +1,10 @@
 import {
-  fetchComments,
   createComment,
   createCommentVote,
-  deleteComment
+  fetchComment,
+  fetchComments,
+  deleteComment,
+  updateComment
 } from "../../helpers/api";
 import { formatArrayToObject } from "../../helpers/utils";
 
@@ -55,11 +57,28 @@ export const fetchAndHandleComments = postId => {
   };
 };
 
+export const fetchAndHandleComment = (commentId, callback) => {
+  return dispatch => {
+    fetchComment(commentId).then(comment => {
+      dispatch(addComment(comment));
+      callback(comment);
+    });
+  };
+};
+
 export const createAndHandleComment = (comment, callback) => {
   return dispatch => {
     createComment(comment)
       .then(comment => dispatch(addComment(comment)))
       .then(() => callback());
+  };
+};
+
+export const updateAndHandleComment = (comment, callback) => {
+  return dispatch => {
+    updateComment(comment)
+      .then(comment => dispatch(addComment(comment)))
+      .then(() => dispatch(callback));
   };
 };
 

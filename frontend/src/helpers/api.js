@@ -69,12 +69,30 @@ export const fetchComments = postId => {
     .then(response => response.data);
 };
 
+export const fetchComment = commentId => {
+  return axios
+    .get(`${api}/comments/${commentId}`, { headers })
+    .then(response => response.data);
+};
+
 export const createComment = comment => {
   const id = generateId();
   const timestamp = Date.now();
 
   return axios
     .post(`${api}/comments`, { ...comment, timestamp, id }, { headers })
+    .then(response => response.data);
+};
+
+export const updateComment = comment => {
+  const timestamp = Date.now();
+
+  return axios
+    .put(
+      `${api}/comments/${comment.id}`,
+      { ...comment, timestamp },
+      { headers }
+    )
     .then(response => response.data);
 };
 

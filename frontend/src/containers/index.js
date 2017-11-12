@@ -2,6 +2,9 @@ export { default as CommentsContainer } from "./Comments/CommentsContainer";
 export { default as EditPostContainer } from "./EditPost/EditPostContainer";
 export { default as FeedContainer } from "./Feed/FeedContainer";
 export {
+  default as EditCommentContainer
+} from "./EditComment/EditCommentContainer";
+export {
   default as NewCommentContainer
 } from "./NewComment/NewCommentContainer";
 export { default as NewPostContainer } from "./NewPost/NewPostContainer";

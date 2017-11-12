@@ -21,25 +21,28 @@ const renderField = field => {
   );
 };
 
-const CommentForm = ({ handleSubmit }) => {
+const CommentForm = ({ initialized, handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Field name="body" component={renderField} label="Content" type="area" />
-      <Field
-        name="author"
-        component={renderField}
-        label="Author"
-        type="input"
-      />
+      {!initialized && (
+        <Field
+          name="author"
+          component={renderField}
+          label="Author"
+          type="input"
+        />
+      )}
       <button type="submit" className="btn btn-green">
-        Add Comment
+        {initialized ? "Update Comment" : "Add Comment"}
       </button>
     </form>
   );
 };
 
 CommentForm.propTypes = {
+  initialized: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired
-}
+};
 
 export default CommentForm;

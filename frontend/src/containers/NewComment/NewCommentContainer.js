@@ -13,15 +13,21 @@ class NewCommentContainer extends Component {
   };
 
   onSubmit = values => {
-    this.props.createAndHandleComment({
-      ...values,
-      parentId: this.props.postId
-    }, () => this.props.reset());
+    this.props.createAndHandleComment(
+      {
+        ...values,
+        parentId: this.props.postId
+      },
+      () => this.props.reset()
+    );
   };
 
   render() {
     return (
-      <CommentForm handleSubmit={this.props.handleSubmit(this.onSubmit)} />
+      <CommentForm
+        initialized={this.props.initialized}
+        handleSubmit={this.props.handleSubmit(this.onSubmit)}
+      />
     );
   }
 }

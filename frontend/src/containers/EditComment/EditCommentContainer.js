@@ -21,7 +21,7 @@ class NewCommentContainer extends Component {
     );
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchAndHandleComment(
       this.props.match.params.commentId,
       comment => this.props.initialize(comment)

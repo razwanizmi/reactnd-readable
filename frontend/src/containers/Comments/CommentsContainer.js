@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { Comments } from "../../components";
 import * as commentsActionCreators from "../../redux/modules/comments";
@@ -9,6 +8,7 @@ import * as commentsActionCreators from "../../redux/modules/comments";
 class CommentsContainer extends Component {
   static propTypes = {
     comments: PropTypes.object.isRequired,
+    createAndHandleCommentVote: PropTypes.func.isRequired,
     fetchAndHandleComments: PropTypes.func.isRequired,
     post: PropTypes.object.isRequired
   };
@@ -18,8 +18,20 @@ class CommentsContainer extends Component {
   }
 
   render() {
+    const {
+      comments,
+      createAndHandleCommentVote,
+      deleteAndHandleComment,
+      post
+    } = this.props;
+
     return (
-      <Comments comments={this.props.comments} post={this.props.post} />
+      <Comments
+        comments={comments}
+        createAndHandleCommentVote={createAndHandleCommentVote}
+        deleteAndHandleComment={deleteAndHandleComment}
+        post={post}
+      />
     );
   }
 }
@@ -39,6 +51,4 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(commentsActionCreators, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(CommentsContainer)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(CommentsContainer);

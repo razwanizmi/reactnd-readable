@@ -1,4 +1,8 @@
-import { fetchComments } from "../../helpers/api";
+import {
+  fetchComments,
+  createCommentVote,
+  deleteComment
+} from "../../helpers/api";
 import { formatArrayToObject } from "../../helpers/utils";
 
 const ADD_COMMENT = "ADD_COMMENT";
@@ -50,6 +54,25 @@ export const fetchAndHandleComments = postId => {
   };
 };
 
+export const deleteAndHandleComment = commentId => {
+  return dispatch => {
+    deleteComment(commentId).then(() => dispatch(removeComment(commentId)));
+  };
+};
+
+export const createAndHandleCommentVote = (commentId, option) => {
+  return dispatch => {
+    createCommentVote(commentId, option).then(() => {
+      if (option === "upVote") {
+        dispatch(upVoteComment(commentId));
+      }
+      if (option === "downVote") {
+        dispatch(downVoteComment(commentId));
+      }
+    });
+  };
+};
+
 const comments = (state = {}, action) => {
   switch (action.type) {
     case ADD_COMMENT:
@@ -79,10 +102,12 @@ const comments = (state = {}, action) => {
         }
       };
     case REMOVE_COMMENT:
-      return {
-        ...state,
-        [action.commentId]: undefined
-      };
+      return Object.keys(state).reduce((accumulator, commentId) => {
+        if (commentId !== action.commentId) {
+          accumulator[commentId] = state[commentId];
+        }
+        return accumulator;
+      }, {});
     default:
       return state;
   }

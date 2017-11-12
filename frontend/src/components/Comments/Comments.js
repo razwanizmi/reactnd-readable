@@ -4,7 +4,24 @@ import { Link } from "react-router-dom";
 import { Votes } from "../";
 import { formatTimestamp } from "../../helpers/utils";
 
-const Comment = ({ comment, post }) => {
+const Comment = ({
+  comment,
+  createAndHandleCommentVote,
+  deleteAndHandleComment,
+  post
+}) => {
+  const handleUpVote = () => {
+    createAndHandleCommentVote(comment.id, "upVote");
+  };
+
+  const handleDownVote = () => {
+    createAndHandleCommentVote(comment.id, "downVote");
+  };
+
+  const handleDelete = () => {
+    deleteAndHandleComment(comment.id);
+  };
+
   return (
     <div>
       <div className="row mt-1">
@@ -26,6 +43,8 @@ const Comment = ({ comment, post }) => {
           <div className="pull-left">
             <Votes
               voteScore={comment.voteScore}
+              handleUpVote={handleUpVote}
+              handleDownVote={handleDownVote}
             />
           </div>
           <div className="pull-right">
@@ -37,7 +56,7 @@ const Comment = ({ comment, post }) => {
             </Link>
             <span
               className="btn btn-tiny btn-red text-0-75 ml-1"
-              onClick={() => {}}
+              onClick={handleDelete}
             >
               Delete
             </span>
@@ -49,17 +68,25 @@ const Comment = ({ comment, post }) => {
 };
 
 Comment.propTypes = {
-  comment: PropTypes.object.isRequired
+  comment: PropTypes.object.isRequired,
+  createAndHandleCommentVote: PropTypes.func.isRequired,
+  deleteAndHandleComment: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired
 };
 
-const Comments = ({ comments, post }) => {
+const Comments = ({
+  comments,
+  createAndHandleCommentVote,
+  deleteAndHandleComment,
+  post
+}) => {
   const commentsIds = Object.keys(comments).sort(
     (a, b) => comments[b].timestamp - comments[a].timestamp
   );
 
   return (
     <div className="row mt-4">
-      <div className="col-xs-8 col-xs-offset-4">
+      <div className="col-xs-6">
         <div className="row">
           <div className="col-xs-12">
             <div className="pull-left">
@@ -77,7 +104,13 @@ const Comments = ({ comments, post }) => {
         </div>
         <hr className="m-0" />
         {commentsIds.map(commentId => (
-          <Comment key={commentId} comment={comments[commentId]} post={post} />
+          <Comment
+            key={commentId}
+            comment={comments[commentId]}
+            createAndHandleCommentVote={createAndHandleCommentVote}
+            deleteAndHandleComment={deleteAndHandleComment}
+            post={post}
+          />
         ))}
       </div>
     </div>
@@ -86,6 +119,8 @@ const Comments = ({ comments, post }) => {
 
 Comments.propTypes = {
   comments: PropTypes.object.isRequired,
+  createAndHandleCommentVote: PropTypes.func.isRequired,
+  deleteAndHandleComment: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired
 };
 

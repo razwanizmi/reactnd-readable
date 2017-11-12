@@ -66,3 +66,15 @@ export const fetchComments = postId => {
     .get(`${api}/posts/${postId}/comments`, { headers })
     .then(response => response.data);
 };
+
+export const deleteComment = commentId => {
+  return axios
+    .delete(`${api}/comments/${commentId}`, { headers })
+    .then(response => response.data);
+};
+
+export const createCommentVote = (commentId, option) => {
+  return axios
+    .post(`${api}/comments/${commentId}`, { option }, { headers })
+    .then(response => response.data);
+};

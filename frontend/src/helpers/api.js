@@ -60,3 +60,9 @@ export const createPostVote = (postId, option) => {
     .post(`${api}/posts/${postId}`, { option }, { headers })
     .then(response => response.data);
 };
+
+export const fetchComments = postId => {
+  return axios
+    .get(`${api}/posts/${postId}/comments`, { headers })
+    .then(response => response.data);
+};

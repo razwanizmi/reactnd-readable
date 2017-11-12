@@ -1,3 +1,6 @@
+import { fetchComments } from "../../helpers/api";
+import { formatArrayToObject } from "../../helpers/utils";
+
 const ADD_COMMENT = "ADD_COMMENT";
 const ADD_COMMENTS = "ADD_COMMENTS";
 const UPVOTE_COMMENT = "UPVOTE_COMMENT";
@@ -36,6 +39,14 @@ const removeComment = commentId => {
   return {
     type: REMOVE_COMMENT,
     commentId
+  };
+};
+
+export const fetchAndHandleComments = postId => {
+  return dispatch => {
+    fetchComments(postId)
+      .then(comments => formatArrayToObject(comments))
+      .then(formattedComments => dispatch(addComments(formattedComments)));
   };
 };
 

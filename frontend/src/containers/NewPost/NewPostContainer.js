@@ -14,7 +14,7 @@ class NewPostContainer extends Component {
     fetchAndHandleCategories: PropTypes.func.isRequired
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchAndHandleCategories();
   }
 

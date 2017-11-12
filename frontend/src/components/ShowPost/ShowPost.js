@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { CommentsContainer } from "../../containers";
 import { Header, Votes } from "../";
 
 const ShowPost = ({
@@ -56,12 +57,7 @@ const ShowPost = ({
             <p className="justify">{post.body}</p>
           </div>
         </div>
-        <div className="row mt-4">
-          <div className="col-xs-6 col-xs-offset-6">
-            COMMENTS
-            <hr className="m-0" />
-          </div>
-        </div>
+        <CommentsContainer post={post} />
       </div>
     </div>
   );

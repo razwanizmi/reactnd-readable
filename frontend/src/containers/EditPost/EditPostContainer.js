@@ -15,7 +15,7 @@ class EditPostContainer extends Component {
     updateAndHandlePost: PropTypes.func.isRequired
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchAndHandleCategories();
     this.props.fetchAndHandlePost(this.props.match.params.postId, post =>
       this.props.initialize(post)

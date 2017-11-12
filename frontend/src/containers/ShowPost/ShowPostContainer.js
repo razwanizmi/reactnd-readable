@@ -12,7 +12,7 @@ class ShowPostContainer extends Component {
     post: PropTypes.object.isRequired
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchAndHandlePost(this.props.match.params.postId);
   }
 

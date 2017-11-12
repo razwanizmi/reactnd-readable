@@ -44,8 +44,10 @@ export const createPost = post => {
 };
 
 export const updatePost = post => {
+  const timestamp = Date.now();
+
   return axios
-    .put(`${api}/posts/${post.id}`, { ...post }, { headers })
+    .put(`${api}/posts/${post.id}`, { ...post, timestamp }, { headers })
     .then(response => response.data);
 };
 
@@ -64,6 +66,15 @@ export const createPostVote = (postId, option) => {
 export const fetchComments = postId => {
   return axios
     .get(`${api}/posts/${postId}/comments`, { headers })
+    .then(response => response.data);
+};
+
+export const createComment = comment => {
+  const id = generateId();
+  const timestamp = Date.now();
+
+  return axios
+    .post(`${api}/comments`, { ...comment, timestamp, id }, { headers })
     .then(response => response.data);
 };
 

@@ -1,3 +1,4 @@
+export { default as CommentForm } from "./CommentForm/CommentForm";
 export { default as Comments } from "./Comments/Comments.js";
 export { default as Feed } from "./Feed/Feed";
 export { default as Header } from "./Header/Header";

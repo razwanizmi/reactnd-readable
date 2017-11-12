@@ -48,7 +48,7 @@ const validate = values => {
     errors.category = "Please select a category";
   }
   if (!values.body) {
-    errors.body = "Please enter some content in the body";
+    errors.body = "Please enter some content";
   }
 
   return errors;

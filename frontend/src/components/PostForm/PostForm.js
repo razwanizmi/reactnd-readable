@@ -62,9 +62,9 @@ const PostForm = ({ categories, handleSubmit, initialized }) => {
             options={categories}
           />
         )}
-        <Field name="body" component={renderField} label="Body" type="area" />
+        <Field name="body" component={renderField} label="Content" type="area" />
         <button type="submit" className="btn btn-green">
-          {initialized ? "Update" : "Save"}
+          {initialized ? "Update Post" : "Create Post"}
         </button>
         <Link className="btn btn-gray ml-2" to="/">
           Cancel

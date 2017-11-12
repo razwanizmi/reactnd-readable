@@ -46,7 +46,7 @@ const validate = values => {
     errors.title = "Please enter a title";
   }
   if (!values.body) {
-    errors.body = "Please enter some content in the body";
+    errors.body = "Please enter some content";
   }
 
   return errors;

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { NewCommentContainer } from "../../containers";
 import { Votes } from "../";
 import { formatTimestamp } from "../../helpers/utils";
 
@@ -84,23 +85,32 @@ const Comments = ({
   );
 
   return (
-    <div className="row mt-4">
-      <div className="col-xs-6">
-        <div className="row">
-          <div className="col-xs-12">
-            COMMENTS ({Object.keys(comments).length})
-          </div>
+    <div className="mt-4">
+      <div className="row">
+        <div className="col-xs-12">
+          COMMENTS ({Object.keys(comments).length})
         </div>
-        <hr className="m-0" />
-        {commentsIds.map(commentId => (
-          <Comment
-            key={commentId}
-            comment={comments[commentId]}
-            createAndHandleCommentVote={createAndHandleCommentVote}
-            deleteAndHandleComment={deleteAndHandleComment}
-            post={post}
-          />
-        ))}
+      </div>
+      <hr className="m-0" />
+      <div className="row">
+        <div className="col-xs-6">
+          {commentsIds.length === 0 && (
+            <p className="mt-3">No comments yet</p>
+          )}
+
+          {commentsIds.map(commentId => (
+            <Comment
+              key={commentId}
+              comment={comments[commentId]}
+              createAndHandleCommentVote={createAndHandleCommentVote}
+              deleteAndHandleComment={deleteAndHandleComment}
+              post={post}
+            />
+          ))}
+        </div>
+        <div className="col-xs-4 col-xs-offset-2 mt-3">
+          <NewCommentContainer postId={post.id} />
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = "http://localhost:3001";
+const api = "/api";
 
 const generateId = () => {
   return Math.random()
